@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FtoriPediaX</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+<canvas class="fx" id="fx" aria-hidden="true"></canvas>
+<div class="ghosts" id="ghosts" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="logo glow" href="#" id="logo">FtoriPediaX</a>
+  <nav class="tabs" id="tabs" aria-label="Menu utama">
+    <button class="tab on" type="button" data-view="explore">Jelajah</button>
+    <button class="tab" type="button" data-view="movies">Film</button>
+    <button class="tab" type="button" data-view="profile">Profil</button>
+  </nav>
+  <button class="chip-me" id="chipMe" type="button" aria-label="Buka profil"></button>
+</header>
+
+<main>
+  <section class="view" id="explore">
+    <div class="ad" id="ad"></div>
+    <div class="hero">
+      <h1 class="title" id="heroTitle">FtoriPediaX</h1>
+      <p class="sub">Temukan anime dan film, kumpulkan XP, lalu panjat rank sampai Eternal.</p>
+      <form class="search" id="searchForm" role="search">
+        <input id="q" type="search" placeholder="Cari judul anime atau film" aria-label="Cari judul" maxlength="60">
+        <button class="btn" type="submit">Cari</button>
+      </form>
+      <div class="filters">
+        <select id="fType" aria-label="Tipe">
+          <option value="">Semua tipe</option>
+          <option value="tv">Serial TV</option>
+          <option value="movie">Film</option>
+        </select>
+        <select id="fGenre" aria-label="Genre">
+          <option value="">Semua genre</option>
+          <option value="1">Action</option>
+          <option value="2">Adventure</option>
+          <option value="4">Comedy</option>
+          <option value="8">Drama</option>
+          <option value="10">Fantasy</option>
+          <option value="14">Horror</option>
+          <option value="22">Romance</option>
+          <option value="24">Sci-Fi</option>
+          <option value="36">Slice of Life</option>
+          <option value="30">Sports</option>
+        </select>
+      </div>
+    </div>
+    <h2 class="h2 glow" id="listTitle">Sedang tayang</h2>
+    <div class="grid" id="grid"></div>
+    <div class="state" id="state" hidden></div>
+  </section>
+
+  <section class="view" id="movies" hidden>
+    <div class="hero slim">
+      <h2 class="title2 glow">Film</h2>
+      <p class="sub">Cari judul, filter genre dan tahun, lihat trailer, pemeran, dan tempat nonton resmi.</p>
+    </div>
+
+    <div class="keybox" id="keyBox" hidden>
+      <h3>Hubungkan TMDB (gratis)</h3>
+      <ol>
+        <li>Daftar akun di themoviedb.org</li>
+        <li>Buka Settings, lalu API, dan ajukan key tipe Developer</li>
+        <li>Tempel API Key (v3) atau Read Access Token di bawah</li>
+      </ol>
+      <form id="keyForm">
+        <input id="keyIn" type="password" placeholder="Tempel API key TMDB" autocomplete="off" aria-label="API key TMDB">
+        <button class="btn" id="keyBtn" type="submit">Simpan dan tes</button>
+      </form>
+      <p class="muted">Key hanya disimpan di browsermu dan tidak ada di dalam kode.</p>
+    </div>
+
+    <div id="mvApp" hidden>
+      <form class="search" id="mvForm" role="search">
+        <input id="mvQ" type="search" placeholder="Cari judul film" aria-label="Cari film" maxlength="60">
+        <button class="btn" type="submit">Cari</button>
+      </form>
+      <div class="filters">
+        <select id="mvGenre" aria-label="Genre film"><option value="">Semua genre</option></select>
+        <select id="mvSort" aria-label="Urutan">
+          <option value="">Urutkan</option>
+          <option value="popularity.desc">Paling populer</option>
+          <option value="vote_average.desc">Rating tertinggi</option>
+          <option value="primary_release_date.desc">Terbaru</option>
+          <option value="revenue.desc">Pendapatan terbesar</option>
+        </select>
+        <select id="mvYear" aria-label="Tahun"><option value="">Semua tahun</option></select>
+        <button class="btn ghost" id="mvRandom" type="button">Acak film</button>
+        <button class="btn ghost" id="mvKeyReset" type="button">Ganti API key</button>
+      </div>
+      <div class="chips" id="mvCats">
+        <button class="chip on" type="button" data-cat="trending">Trending</button>
+        <button class="chip" type="button" data-cat="popular">Populer</button>
+        <button class="chip" type="button" data-cat="now">Di bioskop</button>
+        <button class="chip" type="button" data-cat="top">Rating tertinggi</button>
+        <button class="chip" type="button" data-cat="upcoming">Akan tayang</button>
+      </div>
+      <h2 class="h2 glow" id="mvTitle">Trending minggu ini</h2>
+      <div class="grid" id="mvGrid"></div>
+      <div class="state" id="mvState" hidden></div>
+      <div class="more"><button class="btn ghost" id="mvMore" type="button" hidden>Muat lebih banyak</button></div>
+      <p class="credit">Data film dari TMDB. Produk ini memakai TMDB API tetapi tidak didukung atau disertifikasi oleh TMDB.</p>
+    </div>
+  </section>
+
+  <section class="view" id="profile" hidden></section>
+</main>
+
+<div class="modal" id="modal" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="Detail">
+    <button class="x" id="mClose" type="button" aria-label="Tutup">&times;</button>
+    <div id="mBody"></div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
